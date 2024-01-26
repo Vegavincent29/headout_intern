@@ -1,4 +1,4 @@
-# headout_inter
+# headout_intern
 Certainly, here's a point-wise README for your project:
 
 1. **Project Overview:**

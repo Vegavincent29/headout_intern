@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Content Viewer</title>
+</head>
+<body>
+  <h1>File Content Viewer</h1>
+
+  <form id="fileForm">
+    <label for="fileName">File Name (n): </label>
+    <input type="text" id="fileName" name="n" required>
+
+    <label for="lineNumber">Line Number (m): </label>
+    <input type="number" id="lineNumber" name="m">
+
+    <button type="button" onclick="getData()">Get Data</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    async function getData() {
+      const fileName = document.getElementById('fileName').value;
+      const lineNumber = document.getElementById('lineNumber').value;
+
+      const url = `/data?n=${encodeURIComponent(fileName)}${lineNumber ? `&m=${lineNumber}` : ''}`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.text();
+
+        document.getElementById('result').innerText = data;
+      } catch (error) {
+        console.error(error);
+        document.getElementById('result').innerText = 'Error fetching data.';
+      }
+    }
+  </script>
+</body>
+</html>
